@@ -62,8 +62,8 @@ meta元素提供的信息**不显示在页面中**，一般用来**定义页面�
 	-  特殊符号:  
 	![special](special.png)   
 
-- 图像格式  
-	- img元素属性  
+## 图像格式  	
+- img元素属性  
 ![img](img.png)  
 提示：alt——当**鼠标放在图片上时给出提示**  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;图像的宽度和高度**width、height是用来限制图像大小**  
@@ -73,28 +73,29 @@ meta元素提供的信息**不显示在页面中**，一般用来**定义页面�
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**图像的排列align——bottom、top、middle、left、center、right不懂！！！！**  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**图片的超链接——和文字的超链接方法类似，使用< a>标签完成,只需要将标签放在< a>< /a>之间就可以,如:< a href="链接地址">< img src="图像的地址">< /a>**  
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;**图像热区链接——多个热点区域使用usemap  不懂！！！**  
-- 使用列表
-	- 有序列表：  
+## 使用列表
+- 有序列表：  
 	< ol type="a" start="2">  
 	< li>星期一< /li>  
 	< li>星期二< /li>  
 	< /ol>  
 type的值：  
 ![liebiao_type](liebiao_type.png)  
-	-  无须列表类型type：  
+
+-   无序列表类型type：  
 < ul type="符号类型">  
 < li>列表项< /li>  
 < li>列表项< /li>  
 < /ul>  
 type的值：  
 ![ul_type](ul_type.png)  
-	-  定义列表标记  
+-  定义列表标记  
 < dl>  
 < dt>定义条件< /dt>  
 < dd>定义描述< /dd>  
 < /dl>
--  表格  
-< table width="表格宽度" height="表格宽度">  
+## 表格  
+< table width="表格宽度"  &nbsp;&nbsp;height="表格高度" &nbsp;&nbsp;align="left/center/right" &nbsp;&nbsp;border="" &nbsp;&nbsp;bordercolor="">  
 < caption>表格标题< caption>    
 < th> 表头也就是列名< /th>  
 < tr>  
@@ -104,4 +105,55 @@ type的值：
 < td>  < /td>  
 < td>  < /td>  
 < /td>  
-< /table>
+< /table>  
+
+-  table——cellspacing:内框宽度（单元格之间的间距）
+-  table——cellpadding:文字与边框间距
+-  table——bgcolor表格背景颜色（当然是全部表格，不是单元格）
+-  table——background表格背景图像（值是图像地址）
+-  tr（行）属性——height bordercolor bgcolor background align(水平对齐：left center right ) valigh(垂直：top middle bottom)  
+-  td(单元格)属性——width height **colspan（水平跨度） rowspan(垂直跨度)**  align valign bgcolor bordercolor bordercolorlight(亮边框)  bordercolordark（暗边框）background  
+-  表格的结构(一个一个单元格去修改表的属性或者一行一行修改太麻烦了，所以需要表格的结构)：
+	-  表首标记< thread bgcolor="" align="">< /thread>
+	-  表格主体< tbody bgcolor="" align="">< /tbody>
+	-  表尾标记< tfoot>< /tfoot>
+## 超链接
+
+-  简单的内部链接< a href="链接地址"> ...< /a>(真不知道这用来干嘛)
+-  target——目标窗口的打开方式：  
+![href_target](href_target.png)  
+尝试了一下，真不知道\_sef、\_top、\_parent有啥区别!!!  
+-  锚点链接< a name='锚点名称'>< /a>  **< a href="#锚点名称"> < /a>** 例如:
+><pre><code> < p>
+    < a href="#hello">打招呼< /a>
+  < /p>
+  < p>
+    < a name="hello">大家好，我叫luke。还请大家多多关照！< /a>
+</code></pre>
+链接到其他页面的锚点：   
+**< a href="链接的文件地址#锚点名称">...< /a>**   
+
+-  外部链接——**< a href="http://....">......< /a>**
+-  链接到e-maill——**< a href="mailto:邮件地址">...< /a>**
+-  链接到FTP(文件传输协议):大部分的FTP网站需要一个用户名和密码来进入网站。在FTP网站的链接内如果包含用户名和密码，这些信息对任何浏览源代码的人都是公开的。  
+**< a href="ftp://ftp地址">...< /a>**
+-  链接到telnet:telnet常常用来登录一些BBS网站，也是一种远程登录方式。  
+**< a href="telnet://地址">...< /a>**  
+-  下载文件——**< a href="文件路径">...< /a>**  
+如果是.doc文件等，那么会产生预览功能。如果是.tar、.zip则会下载。
+##多媒体
+-  设置滚动效果——< marquee>....< /marquee>
+	-  滚动方向——dirction:up/down/left/right
+	-  滚动方式——behavior
+![marquee_behavior](marquee_behavior.png)  
+alternate:就是那种左右左、上下上的意思。碰到边界就返回...
+-  滚动的速度scrollamount(以像素为单位)
+-  滚动延迟scrolldelay：时间间隔的单位是毫秒。如果时间设置过长的的话会出现走走停停的效果！
+-  循环次数loop，默认是无限循环，loop可以控制次数；
+-  滚动范围width和height，以像素为单位；
+-  滚动的背景颜色bgcolor;
+-  空白空间hspace、vspace——使用hspace和vspace可以设置它们之间的空白空间；
+-  插入flash/音频/视频——**< embed src="文件地址" width="" height="">...</embed>**
+-  背景音乐bgsound（文件可以是avi、mp3等格式）——**< bgsound src="文件地址">**
+	-  loop——循环次数
+-java Applet  
