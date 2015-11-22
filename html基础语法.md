@@ -157,3 +157,108 @@ alternate:就是那种左右左、上下上的意思。碰到边界就返回...
 -  背景音乐bgsound（文件可以是avi、mp3等格式）——**< bgsound src="文件地址">**
 	-  loop——循环次数
 -java Applet  
+##框架结构
+基本结构：  
+< frameset >  
+&nbsp;&nbsp;&nbsp;&nbsp;< frame>  
+&nbsp;&nbsp;&nbsp;&nbsp;< frame>  
+< /frameset>
+  
+-  frameset的性质：
+	-  **rows="框架1高度,框架2高度..."**,rows的值可以是像素值也可以是百分比组成，**还可以是：20%,\***代表前面一个窗口20%，剩下的全部占用；   
+	-  **cols=“框架1宽度,框架2宽度,...”**,同样cols的值也可以是像素值也可以是百分比组成.  
+	-  框架的边框**frameborder="yes/no/1/0"**  
+	-  框架的边框宽度**framespacing=""**(并不知道这是干嘛用的，border不就可以啦？)
+	-  边框
+	-  框架的边框颜色**bordercolor=""**  
+	-  嵌套分割窗口：  
+![frame_inner](frame_inner.png)  
+
+-  frame的属性
+	-  **页面源文件src=""**
+	-  **页面名称name=""**(下面创建框架链接时有实例)——页面名称是为了便于页面的查找和链接所提供的一个属性。例如一个左右框架结构，左侧为链接，右侧为正文，当单击左侧链接以后要在右侧框架中打开正文，此时就需要用到< frame>的name属性（也就是上面所说的< a href="srcfile#name">的方法）。注意：**框架的页面名称中不允许包含特殊字符、连字符、空格等，必须是单个的单词或者字母组合。**
+	-  **禁止调整窗口尺寸大小noresize**  
+< frame src="页面源文件地址" norsize>  
+	-  **边框和页面内容的水平距离marginwidth**  
+	-  **边框和页面内容的垂直距离marginheight**
+	-  **控制框架滚动条的显示scrolling=“yes/no/auto”**
+	-  **不支持框架标记noframes**：如果遇到不支持框架结构的浏览器，或者用户关闭了浏览器的框架显示功能，此时就需要用< noframes>来设置替换的内容，告诉浏览者其浏览器无法打开框架页面。
+< noframes>替换显示内容< /noframes>  
+  
+-  浮动框架iframe**(感觉常用在table中)**
+	-  **页面源文件src=“”**
+	-  宽度width=“” 高度height=""
+	-  对齐方式align=“left/right/middle/bottom”
+	-  滚动条scrolling=“auto/yes/no”
+-  创建框架链接  
+普通的框架结构之间通过target互相链接起来。一般情况下，一个页面中会有一个框架窗口作为导航页面，其中添加了对另一个框架内容的链接设置，而这些链接则是通过target来实现的。  
+例如：  
+common\_frame_link.html  
+![common_frmae_link](common_frmae_link.png)  
+top.html  
+![top](top.png)  
+beijing.html  
+![beijing](beijing.png)
+##使用表单
+-  表单标记form
+	-  **提交表单action=""**——action用于指定表单数据提交到那一个地址进行处理;
+	-  **表单名称name=""**——name用于给表单命名，这一属性不是表单的必要属性，但是为了防止表单提交到后台处理程序时出现混乱，一般需要给表单命名;
+	-  **传送方法method=""**——表单的method属性用于指定在数据提交到服务器的时候使用哪种HTTP提交方法，可取值为get或post。
+		-  get：表单数据被传送到action属性指定的URL，然后这个新URL被送到处理程序上;
+		-  post：表单数据被包含在表单主体中，然后被送到处理程序上;
+	-  **编码方式enctype=""**	——表单中的enctype属性用于设置表单信息提交的编码方式；  
+![enctype](enctype.png)  
+enctype属性默认的取值是application/x-www-form-urlencoded，这是所有网页的表单所使用的可接受的类型。  
+	-  target用来指定目标窗口的打开方式，表单的目标窗口往往用来显示表单的返回信息——目标窗口的打开方式有4个选项：\_blank、\_parent、\_self和\_top。其中**\_blank为将链接的文件载入一个未命名的新浏览器窗口中；\_parent为将链接的文件载入含有该链接框架的父框架集或父窗口中；\_self为将链接的文件载入该链接所在的同一框架或窗口中；_top为在整个浏览器窗口中载入所链接的文件，因而会删除所有框架**。  
+	实例可以参考一下：<http://www.w3school.com.cn/tags/att_form_target.asp>
+-  插入表单对象
+	-  文字字段text  
+		语法如下：**< input name="控件名称" type="text" value="文字字段的默认取值" size="控件的长度" maxlength="最长字符数">**
+	![form_text](form_text.png)
+	-  **密码域password(就是把上面的type的值改为password即可)**——密码域仅仅使周围的人看不见输入的文本，它不能使数据安全。为了使数据安全，需要在浏览器和服务器之间建立一个安全链接;
+	-  单选按钮radio  
+	语法：< input name="单选按钮的名称" type="radio" value="单选按钮的值" checked />  
+	说明：**对于一个选择列表中的所有单选按钮来说，name往往要设置为相同的名称，这样在传递时才能更好地对某一个选择内容进行判断(这句话错误)。在一个单选按钮组中只有一个单选按钮可以设置为checked。**  
+	**我试了一下：确实在一个form中定义的radio只能有一个checked**  
+	-  复选框  
+	语法:**< input name="复选框名称" type="checkbox" value="复选框的取值" checked />**  
+	事例：  
+	![radio_checkbox](radio_checkbox.png)  
+	-  普通按钮button  
+	语法:**< input type="submit" name="按钮名称" value="按钮取值" onclick="处理程序" />**  
+	说明：**value的取值就是显示在按钮上的文字，在button属性中可以添加onclick来实现一些特殊的功能.**   
+	![button](button.png)
+	-  提交按钮submit  
+	语法：**< input type="submit" name="按钮名称" value="按钮的取值" />**
+	-  重置按钮reset  
+	语法：**< input type="reset" name="按钮名称" value="按钮的取值" />**
+	-  图像域(**使用一幅画作为按钮**)  
+	语法：**< input name="图像的名称" type="image" src="图像路径" />**
+	-  隐藏域hidden(用来传送那些不需要对用户可见的数据)  
+	语法：**< input name="隐藏域" type="hidden" value="隐藏域的取值" />**
+	-  文件域(**文件域在上传文件时常常用到，它用于查找硬盘中的文件路径，然后通过表单将选中的文件上传，在上传图像时也常常用到**)   
+	语法：**< input name="文件域名" type="file" size="控件的长度" maxlength="最长字符数" />**  
+	事例:  
+	![upload_file](upload_file.png)  
+-  菜单和列表  
+	-  下拉菜单  
+	语法:**< select name="下拉菜单名称">  
+		 < option value="选项值" selected>选项显示内容  
+		 ....  
+		< /select>**
+	- 列表项  
+	语法：**< select name=“列表项名称” size="显示的列表项数" mutiple>   
+	< option value="选项值" selected>选项显示内容  
+	...
+	< /select>**  
+	说明：size用于设置在页面中显示的最多列表项数，当超过这个值时会出现滚动条。  
+-  文本域标记textarea  
+	语法：**< textarea name="文本域名称" cols="列数" rows="行数">< /testarea>**  
+	说明：**在语法中，不能使用value属性来建立一个在文本域中显示的初始值。cols和rows是用来控制testarea显示的窗口的大小，并不是用来控制职能输入多少文字**
+-  id标记(**主要用于标示一个惟一的元素**)  
+	语法：< id=元素的标识名>   
+	事例：  
+	![id](id.png)
+	
+
+	
